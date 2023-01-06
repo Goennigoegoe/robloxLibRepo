@@ -2836,7 +2836,6 @@ function library:Load(options)
             cursor.PointB = mousepos + Vector2.new(6, 12)
             cursor.PointC = mousepos + Vector2.new(6, 12)
         end
-        astolfo.Visible = self.open
     end)
 
     local holder = utility.create("Square", {
