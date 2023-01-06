@@ -2868,9 +2868,12 @@ function library:Load(options)
     })
 
     main.MouseEnter:Connect(function()
+        --[[services.ContextActionService:BindActionAtPriority("disablemousescroll", function()
+            return Enum.ContextActionResult.Sink
+        end, false, 3000, Enum.UserInputType.MouseWheel)]]--
         services.ContextActionService:BindActionAtPriority("disablemousescroll", function()
             return Enum.ContextActionResult.Sink
-        end, false, 3000, Enum.UserInputType.MouseWheel)
+        end, false, Enum.UserInputType.MouseWheel)
     end)
 
     main.MouseLeave:Connect(function()
