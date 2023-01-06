@@ -24,7 +24,7 @@ function getClosest(localplayer, part)
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
         if v ~= localplayer and Alive(v) and Alive(localplayer) then
-            local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude
+            local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
             if Dist < closestDist then
                 closestDist = Dist
                 closestPlayer = v
