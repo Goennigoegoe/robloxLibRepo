@@ -6,7 +6,7 @@ function Alive(Player)
 end
 
 function checkFOV(part, camera, radius)
-    local worldToViewportPoint = CurrentCamera.worldToViewportPoint;
+    local worldToViewportPoint = camera.worldToViewportPoint;
     local vector, onScreen = camera:WorldToViewportPoint(part.Position)
     local screenMiddle = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
 
@@ -27,7 +27,7 @@ local library = {};
 library.__index = library;
 
 function library._checkFOV(part, camera, radius)
-    local worldToViewportPoint = CurrentCamera.worldToViewportPoint;
+    local worldToViewportPoint = camera.worldToViewportPoint;
     local vector, onScreen = camera:WorldToViewportPoint(part.Position)
     local screenMiddle = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
 
