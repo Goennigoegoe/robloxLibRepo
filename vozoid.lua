@@ -2822,7 +2822,7 @@ function library:Load(options)
     astolfo.Position = Vector2.new(1920 - 500, 1080 - 613)
     astolfo.Rounding = 0
     astolfo.Transparency = 1
-    astolfo.Visible = false
+    astolfo.Visible = true
 
     self.astolfo = astolfo
     self.cursor = cursor
@@ -2835,10 +2835,8 @@ function library:Load(options)
             cursor.PointA = mousepos
             cursor.PointB = mousepos + Vector2.new(6, 12)
             cursor.PointC = mousepos + Vector2.new(6, 12)
-            astolfo.Visible = true
-        else
-            astolfo.Visible = false
         end
+        astolfo.Visible = self.open
     end)
 
     local holder = utility.create("Square", {
