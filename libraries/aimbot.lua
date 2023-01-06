@@ -56,7 +56,7 @@ function library._getClosestFOV(localplayer, fov, part, camera)
     local closestPlayer = nil
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
-        if v ~= localplayer and Alive(v) and Alive(localplayer) and library._checkFOV(part, camera, fov) then
+        if v ~= localplayer and Alive(v) and Alive(localplayer) and library._checkFOV(v.Character[part], camera, fov) then
             local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
             if Dist < closestDist then
                 closestDist = Dist
