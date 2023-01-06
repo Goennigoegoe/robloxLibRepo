@@ -6,11 +6,11 @@ function Alive(Player)
 end
 
 function checkFOV(part, camera, radius)
-    local partOSP, onScreen = camera:worldToViewportPoint(part.Position)
+    local vector, onScreen = camera:worldToViewportPoint(part.Position)
     local screenMiddle = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
 
     if onScreen then
-        local distance = (partOSP - screenMiddle).Magnitude
+        local distance = (vector - screenMiddle).Magnitude
 
         if distance < radius then
             return true;
@@ -24,11 +24,11 @@ local library = {};
 library.__index = library;
 
 function library._checkFOV(part, camera, radius)
-    local partOSP, onScreen = camera:worldToViewportPoint(part.Position)
+    local vector, onScreen = camera:worldToViewportPoint(part.Position)
     local screenMiddle = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
 
     if onScreen then
-        local distance = (partOSP - screenMiddle).Magnitude
+        local distance = (vector - screenMiddle).Magnitude
 
         if distance < radius then
             return true;
