@@ -7,7 +7,9 @@ end
 
 local library = {};
 
-function library.checkFOV(part, camera, radius)
+library.__index = library;
+
+function library._checkFOV(part, camera, radius)
     local partOSP, onScreen = camera:worldToViewportPoint(part)
     local screenMiddle = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
 
@@ -21,7 +23,7 @@ function library.checkFOV(part, camera, radius)
     return false;
 end
 
-function library.getClosest(localplayer, part)
+function library._getClosest(localplayer, part)
     local closestPlayer = nil
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
@@ -36,7 +38,7 @@ function library.getClosest(localplayer, part)
     return closestPlayer
 end
 
-function library.getClosestFOV(localplayer, fov, part, camera)
+function library._getClosestFOV(localplayer, fov, part, camera)
     local closestPlayer = nil
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
@@ -51,7 +53,7 @@ function library.getClosestFOV(localplayer, fov, part, camera)
     return closestPlayer
 end
 
-function library.aimAtPart(camera, part)
+function library._aimAtPart(camera, part)
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
 end
 
