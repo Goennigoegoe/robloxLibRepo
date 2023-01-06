@@ -10,7 +10,7 @@ function checkFOV(part, camera, radius)
     local vector, onScreen = camera:WorldToViewportPoint(part.Position)
     local screenMiddle = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
 
-    local position = worldToViewportPoint(camera, part.Position)
+    local position = Vector2.new(vector.X, vector.Y)
 
     if onScreen then
         local distance = (position - screenMiddle).Magnitude
@@ -31,7 +31,7 @@ function library._checkFOV(part, camera, radius)
     local vector, onScreen = camera:WorldToViewportPoint(part.Position)
     local screenMiddle = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
 
-    local position = worldToViewportPoint(camera, part.Position)
+    local position = Vector2.new(vector.X, vector.Y)
 
     if onScreen then
         local distance = (position - screenMiddle).Magnitude
