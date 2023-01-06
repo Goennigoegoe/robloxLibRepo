@@ -5,7 +5,9 @@ function Alive(Player)
     return false
 end
 
-function checkFOV(part, camera, radius)
+local library = {};
+
+function library.checkFOV(part, camera, radius)
     local partOSP, onScreen = camera:worldToViewportPoint(part)
     local screenMiddle = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
 
@@ -19,7 +21,7 @@ function checkFOV(part, camera, radius)
     return false;
 end
 
-function getClosest(localplayer, part)
+function library.getClosest(localplayer, part)
     local closestPlayer = nil
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
@@ -34,7 +36,7 @@ function getClosest(localplayer, part)
     return closestPlayer
 end
 
-function getClosestFOV(localplayer, fov, part, camera)
+function library.getClosestFOV(localplayer, fov, part, camera)
     local closestPlayer = nil
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
@@ -49,6 +51,8 @@ function getClosestFOV(localplayer, fov, part, camera)
     return closestPlayer
 end
 
-function aimAtPart(camera, part)
+function library.aimAtPart(camera, part)
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
 end
+
+return setmetatable({}, library);
