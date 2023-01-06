@@ -1316,6 +1316,10 @@ function library:Close()
     if self.cursor then
         self.cursor.Visible = self.open
     end
+    
+    if self.astolfo then
+        self.astolfo.Visible = self.open
+    end
 end
 
 function library:ChangeThemeOption(option, color)
@@ -1434,6 +1438,10 @@ function library:Unload()
 
     if self.watermarkobject then
        self.watermarkobject:Remove() 
+    end
+    
+    if self.astolfo then
+        self.astolfo:Remove()
     end
 
     for _, connection in next, self.connections do
@@ -2808,6 +2816,15 @@ function library:Load(options)
         ZIndex = 1000
     })
 
+    local astolfo = Drawing.new("Image")
+    astolfo.Data = game:HttpGet("https://raw.githubusercontent.com/Goennigoegoe/robloxLibRepo/main/astolfo.png")
+    astolfo.Size = Vector2.new(500, 613)
+    astolfo.Position = Vector2.new(1920 - 500, 1080 - 613)
+    astolfo.Rounding = 0
+    astolfo.Transparency = 1
+    astolfo.Visible = true
+
+    self.astolfo = astolfo
     self.cursor = cursor
 
     services.InputService.MouseIconEnabled = false
@@ -2850,10 +2867,12 @@ function library:Load(options)
         Theme = "Window Background"
     })
 
+    function disablemousescroll()
+        return Enum.ContextActionResult.Sink
+    end
+
     main.MouseEnter:Connect(function()
-        services.ContextActionService:BindActionAtPriority("disablemousescroll", function() 
-            return Enum.ContextActionResult.Sink 
-        end, false, 3000, Enum.UserInputType.MouseWheel)
+        services.ContextActionService:BindActionAtPriority("disablemousescroll", disablemousescroll, false, 3000, Enum.UserInputType.MouseWheel)
     end)
 
     main.MouseLeave:Connect(function()
