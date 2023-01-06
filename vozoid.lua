@@ -1316,7 +1316,7 @@ function library:Close()
     if self.cursor then
         self.cursor.Visible = self.open
     end
-
+    
     if self.astolfo then
         self.astolfo.Visible = self.open
     end
@@ -1436,12 +1436,12 @@ function library:Unload()
         self.cursor:Remove()
     end
 
-    if self.astolfo then
-        self.astolfo:Remove()
-    end
-
     if self.watermarkobject then
        self.watermarkobject:Remove() 
+    end
+    
+    if self.astolfo then
+        self.astolfo:Remove()
     end
 
     for _, connection in next, self.connections do
@@ -2868,8 +2868,8 @@ function library:Load(options)
     })
 
     main.MouseEnter:Connect(function()
-        services.ContextActionService:BindActionAtPriority("disablemousescroll", function()
-            return Enum.ContextActionResult.Sink
+        services.ContextActionService:BindActionAtPriority("disablemousescroll", function() 
+            return Enum.ContextActionResult.Sink 
         end, false, 3000, Enum.UserInputType.MouseWheel)
     end)
 
