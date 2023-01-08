@@ -44,7 +44,7 @@ function library._checkFOV(part, camera, radius)
 end
 
 function library._checkWall(part, camera, localplayer)
-    local ray = Ray.new(camera.Position, (part.Position - camera.Position).Unit * 300)
+    local ray = Ray.new(camera.CFrame.Position, (part.Position - camera.CFrame.Position).Unit * 300)
     local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head}, false, true)
     local pos, visible = camera:WorldToScreenPoint(part.Position)
     if raycast then
