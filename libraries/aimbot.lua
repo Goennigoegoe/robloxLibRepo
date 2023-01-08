@@ -1,5 +1,3 @@
-print("0.1")
-
 function Alive(Player)
     if Player and Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") ~= nil and Player.Character:FindFirstChild("Humanoid") ~= nil and Player.Character:FindFirstChild("Head") ~= nil then
         return true
