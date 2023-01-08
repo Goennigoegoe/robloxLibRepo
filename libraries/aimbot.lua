@@ -45,10 +45,12 @@ end
 
 function library._checkWall(part, camera, localplayer)
     local ray = Ray.new(camera.Position, (part.Position - camera.Position).Unit * 300)
-    local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character}, false, true)
+    local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head}, false, true)
     local pos, visible = camera:WorldToScreenPoint(part.Position)
     if raycast then
-        if part.Parent.FindFirstChild("Humanoid") == nil then
+        if raycast.Parent.FindFirstChild("Humanoid") == nil then
+            return false;
+        elseif raycast.Parent == nil then
             return false;
         end
         if visible then
@@ -57,6 +59,7 @@ function library._checkWall(part, camera, localplayer)
             return false;
         end
     end
+    return false;
 end
 
 function library._getClosest(localplayer, part)
