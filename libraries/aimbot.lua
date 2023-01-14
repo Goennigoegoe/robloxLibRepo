@@ -96,4 +96,12 @@ function library._aimAtPart(camera, part)
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
 end
 
+function library._silentAimAtPart(camera, part)
+    local savePos = camera.CFrame.Angles;
+
+    camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
+    task.wait();
+    camera.CFrame.Angles = savePos;
+end
+
 return setmetatable({}, library);
