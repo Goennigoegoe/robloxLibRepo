@@ -23,7 +23,7 @@ end
 
 function library.Angle(Angle, player)
     if Alive(player) then
-        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, math.rad(angle), 0);
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, math.rad(Angle), 0);
     end
 end
 
