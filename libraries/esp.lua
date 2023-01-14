@@ -56,6 +56,8 @@ for i,v in pairs(game.Players:GetChildren()) do
                     Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
                     Box.Visible = true
 
+                    Box.Color = library.Box.Color;
+
                     if v.TeamColor == lplr.TeamColor then
                         BoxOutline.Visible = false
                         Box.Visible = false
@@ -111,6 +113,8 @@ game.Players.PlayerAdded:Connect(function(v)
                     Box.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
                     Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
                     Box.Visible = true
+                    
+                    Box.Color = library.Box.Color;
 
                     if v.TeamColor == lplr.TeamColor then
                         BoxOutline.Visible = false
