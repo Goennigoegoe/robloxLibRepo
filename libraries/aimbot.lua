@@ -45,8 +45,6 @@ function createTracer(pos1, pos2)
                 tracer.Visible = false;
             end
         end
-        task.wait(1);
-        tracer:Remove()
     end
     dotracer();
 end
