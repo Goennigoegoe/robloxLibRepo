@@ -22,7 +22,7 @@ function checkFOV(part, camera, radius)
     return false;
 end
 
-function createTracer(pos1, pos2)
+function createTracer(pos1, pos2, camera)
     local tracer = Drawing.new("Line");
     tracer.Transparency = 1;
     tracer.Color = Color3.new(255, 255, 255);
@@ -154,7 +154,7 @@ function library._silentAimAtPart(camera, part, usewait, tracer, localplayer)
         local ray = Ray.new(camera.CFrame.Position, camera.CFrame.LookVector * 1000)--(part.Character.HumanoidRootPart.Position - camera.CFrame.Position).Unit * 300)
         local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head}, false, true)
         if raycast then
-            createTracer(camera.CFrame.Position, Vector3.new(position.X, position.Y, position.Z));
+            createTracer(camera.CFrame.Position, Vector3.new(position.X, position.Y, position.Z), camera);
         end
     end
     if usewait then
