@@ -116,11 +116,13 @@ function library._aimAtPart(camera, part)
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
 end
 
-function library._silentAimAtPart(camera, part)
+function library._silentAimAtPart(camera, part, usewait)
     local savePos = camera.CFrame;
 
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
-    task.wait();
+    if usewait then
+        task.wait();
+    end
     camera.CFrame = savePos;
 end
 
