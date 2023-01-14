@@ -48,7 +48,7 @@ function library._checkWall(part, camera, localplayer)
     local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head}, false, true)
     local pos, visible = camera:WorldToScreenPoint(part.Character.HumanoidRootPart.Position)
     if raycast then
-        if raycast.Parent.FindFirstChild("Humanoid") == nil then
+        if raycast.Parent:FindFirstChild("Humanoid") == nil then
             return false;
         elseif raycast.Parent == nil then
             return false;
