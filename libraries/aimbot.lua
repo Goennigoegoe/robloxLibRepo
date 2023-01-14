@@ -22,6 +22,35 @@ function checkFOV(part, camera, radius)
     return false;
 end
 
+function createTracer(pos1, pos2)
+    local tracer = Drawing.new("Line");
+    tracer.Transparency = 1;
+    tracer.Color = Color3.new(255, 255, 255);
+    tracer.Thickness = 1;
+    tracer.From = 0;
+    tracer.To = 0;
+    tracer.Visible = false
+
+    function dotracer()
+        game:GetService("RunService").RenderStepped:Connect(function())
+            local vector1, onScreen1 = camera:WorldToViewportPoint(pos1);
+            local from = Vector2.new(vector1.X, vector1.Y);
+            local vector2, onScreen2 = camera:WorldToViewportPoint(pos2);
+            local to = Vector2.new(vector2.X, vector2.Y);
+            if onScreen1 and onScreen2 then
+                tracer.From = from;
+                tracer.To = to;
+                tracer.Visible = true;
+            else
+                tracer.Visible = false;
+            end
+        end
+        task.wait(1);
+        tracer:Remove()
+    end
+    dotracer();
+end
+
 local library = {};
 
 library.__index = library;
@@ -116,10 +145,18 @@ function library._aimAtPart(camera, part)
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
 end
 
-function library._silentAimAtPart(camera, part, usewait)
+function library._silentAimAtPart(camera, part, usewait, tracer, localplayer)
     local savePos = camera.CFrame;
 
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
+    if tracer then
+        --(plr.Character:WaitForChild("Head").Position - cam.CFrame.Position).Unit * 1000
+        local ray = Ray.new(camera.CFrame.Position, camera.CFrame.LookVector * 1000)--(part.Character.HumanoidRootPart.Position - camera.CFrame.Position).Unit * 300)
+        local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head}, false, true)
+        if raycast then
+            createTracer(camera.CFrame.Position, position);
+        end
+    end
     if usewait then
         task.wait();
     end
