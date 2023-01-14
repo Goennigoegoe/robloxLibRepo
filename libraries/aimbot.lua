@@ -29,23 +29,28 @@ function createTracer(pos1, pos2, camera)
     tracer.Thickness = 1;
     tracer.From = Vector2.new(0, 0);
     tracer.To = Vector2.new(0, 0);
-    tracer.Visible = false
+    tracer.Visible = false;
+    
+    local destroyed = false;
 
     function dotracer()
         game:GetService("RunService").RenderStepped:Connect(function()
-            local vector1, onScreen1 = camera:WorldToViewportPoint(pos1);
-            local from = Vector2.new(vector1.X, vector1.Y);
-            local vector2, onScreen2 = camera:WorldToViewportPoint(pos2);
-            local to = Vector2.new(vector2.X, vector2.Y);
-            if onScreen1 and onScreen2 then
-                tracer.From = from;
-                tracer.To = to;
-                tracer.Visible = true;
-            else
-                tracer.Visible = false;
+            if not destroyed then
+                local vector1, onScreen1 = camera:WorldToViewportPoint(pos1);
+                local from = Vector2.new(vector1.X, vector1.Y);
+                local vector2, onScreen2 = camera:WorldToViewportPoint(pos2);
+                local to = Vector2.new(vector2.X, vector2.Y);
+                if onScreen1 and onScreen2 then
+                    tracer.From = from;
+                    tracer.To = to;
+                    tracer.Visible = true;
+                else
+                    tracer.Visible = false;
+                end
             end
         end)
         task.wait(1)
+        destroyed = true;
         tracer:Remove();
     end
     dotracer();
