@@ -101,7 +101,7 @@ function library._getClosest(localplayer, part, teamCheck)
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
         if teamCheck then
-            if v ~= localplayer and v.Team ~= localplayer.Team and Alive(v) and Alive(localplayer) then
+            if v ~= localplayer and v.Team ~= localplayer.Team and Alive(v) and library._checkWall(v.Character[part], camera, localplayer) and Alive(localplayer) then
                 local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
                 if Dist < closestDist then
                     closestDist = Dist
@@ -109,7 +109,7 @@ function library._getClosest(localplayer, part, teamCheck)
                 end
             end
         else
-            if v ~= localplayer and Alive(v) and Alive(localplayer) then
+            if v ~= localplayer and Alive(v) and library._checkWall(v.Character[part], camera, localplayer) and Alive(localplayer) then
                 local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
                 if Dist < closestDist then
                     closestDist = Dist
@@ -126,7 +126,7 @@ function library._getClosestFOV(localplayer, fov, part, camera, teamCheck)
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
         if teamCheck then
-            if v ~= localplayer and v.Team ~= localplayer.Team and Alive(v) and Alive(localplayer) and library._checkFOV(v.Character[part], camera, fov) then
+            if v ~= localplayer and v.Team ~= localplayer.Team and Alive(v) and Alive(localplayer) and library._checkWall(v.Character[part], camera, localplayer) and library._checkFOV(v.Character[part], camera, fov) then
                 local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
                 if Dist < closestDist then
                     closestDist = Dist
@@ -134,7 +134,7 @@ function library._getClosestFOV(localplayer, fov, part, camera, teamCheck)
                 end
             end
         else
-            if v ~= localplayer and Alive(v) and Alive(localplayer) and library._checkFOV(v.Character[part], camera, fov) then
+            if v ~= localplayer and Alive(v) and Alive(localplayer) and library._checkWall(v.Character[part], camera, localplayer) and library._checkFOV(v.Character[part], camera, fov) then
                 local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
                 if Dist < closestDist then
                     closestDist = Dist
