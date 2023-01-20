@@ -22,7 +22,7 @@ function checkFOV(part, camera, radius)
     return false;
 end
 
---[[function createTracer(pos1, pos2, camera)
+function createTracer(pos1, pos2, camera)
     local tracer = Drawing.new("Line");
     tracer.Transparency = 1;
     tracer.Color = Color3.new(255, 255, 255);
@@ -53,8 +53,8 @@ end
         destroyed = true;
         tracer:Remove();
     end
-    dotracer();
-end]]--
+    coroutine.wrap(dotracer)();
+end
 
 local library = {};
 
@@ -150,18 +150,17 @@ function library._aimAtPart(camera, part)
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
 end
 
-function library._silentAimAtPart(camera, part, usewait)--, tracer, localplayer)
+function library._silentAimAtPart(camera, part, usewait, tracer, localplayer)
     local savePos = camera.CFrame;
 
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
-    --[[if tracer then
-        --(plr.Character:WaitForChild("Head").Position - cam.CFrame.Position).Unit * 1000
+    if tracer then
         local ray = Ray.new(camera.CFrame.Position, camera.CFrame.LookVector * 1000)--(part.Character.HumanoidRootPart.Position - camera.CFrame.Position).Unit * 300)
         local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head}, false, true)
         if raycast then
-            createTracer(camera.CFrame.Position, Vector3.new(position.X, position.Y, position.Z), camera);
+            createTracer(camera.CFrame.Position, position, camera);
         end
-    end]]--
+    end
     if usewait then
         task.wait();
     end
