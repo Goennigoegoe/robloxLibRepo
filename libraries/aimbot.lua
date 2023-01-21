@@ -78,7 +78,6 @@ function library._checkFOV(part, camera, radius)
 end
 
 function library._checkWall(part, camera, localplayer)
-    print(camera.CFrame.X .. " " .. camera.CFrame.Y .. " " .. camera.CFrame.Z)
     local ray = Ray.new(camera.CFrame.Position, (part.Character.HumanoidRootPart.Position - camera.CFrame.Position).Unit * 300);
     local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head, part.Character.HumanoidRootPart}, false, true)
     local pos, visible = camera:WorldToScreenPoint(part.Character.HumanoidRootPart.Position)
@@ -97,7 +96,7 @@ function library._checkWall(part, camera, localplayer)
     return false;
 end
 
-function library._getClosest(localplayer, part, teamCheck)
+function library._getClosest(localplayer, part, teamCheck, camera)
     local closestPlayer = nil
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
