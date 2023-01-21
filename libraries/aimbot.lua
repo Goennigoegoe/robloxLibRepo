@@ -154,7 +154,7 @@ function library._silentAimAtPart(camera, part, usewait, tracer, localplayer)
     local savePos = camera.CFrame;
 
     camera.CFrame = CFrame.new(camera.CFrame.Position, part.Position);
-    if tracer then
+    if tracer and Alive(localplayer) then
         local ray = Ray.new(camera.CFrame.Position, camera.CFrame.LookVector * 1000)--(part.Character.HumanoidRootPart.Position - camera.CFrame.Position).Unit * 300)
         local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head}, false, true)
         if raycast then
