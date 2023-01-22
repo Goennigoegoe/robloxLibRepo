@@ -104,7 +104,7 @@ function library.CreateLabel(text)
     label.Text = text;
     label.Color = Color3.new(255, 255, 255);
     label.Center = false;
-    label.Size = 10;
+    label.Size = 25;
     label.Outline = true;
     label.Font = 0;
     label.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
@@ -120,7 +120,7 @@ function library.CreateButton(text, callback)
     button.Text = text;
     button.Color = Color3.new(255, 255, 255);
     button.Center = false;
-    button.Size = 10;
+    button.Size = 25;
     button.Outline = true;
     button.Font = 0;
     button.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
