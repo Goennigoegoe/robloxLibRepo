@@ -71,7 +71,7 @@ local selectedItem = 1;
 local Camera = workspace.CurrentCamera;
 local viewportX = Camera.ViewportSize.X;
 local viewportY = Camera.ViewportSize.Y;
-local viewportSize = Camera.ViewPortSize;
+local viewportSize = Camera.ViewportSize;
 
 local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20}, true);
 
@@ -135,7 +135,6 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
         selectedItem = selectedItem - 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
         utility.setColor(selectedItem, interactables);
-        
     elseif key.KeyCode == Enum.KeyCode.KeypadEight then
         selectedItem = selectedItem + 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
