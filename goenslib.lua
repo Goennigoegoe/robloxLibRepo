@@ -61,6 +61,13 @@ function utility.setColor(selected, tbl)
     end
 end
 
+function utility.toOnOff(bool)
+    if bool then
+        return "On";
+    end
+    return "Off";
+end
+
 local drawings = {};
 --[[local elements = {};
 local toggles = {};
@@ -145,7 +152,7 @@ function library:CreateToggle(text, default, callback, flag)
     local toggle = Drawing.new("Text");
     toggle.Visible = true;
     toggle.Transparency = 1;
-    toggle.Text = text;
+    toggle.Text = text .. ": " .. utility.toOnOff(default);
     toggle.Color = Color3.new(255, 255, 255);
     toggle.Center = false;
     toggle.Size = self.TextSize;
@@ -160,6 +167,10 @@ function library:CreateToggle(text, default, callback, flag)
     table.insert(callbacks, callback);
     table.insert(objtypes, 1);
     table.insert(flagnames, flag);
+
+    game:GetService("RunService").Heartbeat:Connect(function()
+        toggle.Text = text .. ": " .. utility.toOnOff(self.flags[flag]);
+    end)
 
     return toggle;
 end
