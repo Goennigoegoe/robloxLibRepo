@@ -55,7 +55,7 @@ function utility.setColor(selected, tbl)
             tbl[i].Color = Color3.new(255, 255, 255);
         else
             tbl[i].Color = Color3.new(0, 0, 255);
-            print("selected");
+            --print("selected");
         end
     end
 end
@@ -137,6 +137,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
     if key.KeyCode == Enum.KeyCode.KeypadTwo then
         selectedItem = selectedItem - 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
+        print(utility.getLength(interactables));
         utility.setColor(selectedItem, interactables);
         --print("down");
     elseif key.KeyCode == Enum.KeyCode.KeypadEight then
