@@ -183,14 +183,24 @@ function library:CreateSlider(text, default, min, max, callback, flag)
     table.insert(objtypes, 2);
     table.insert(flagnames, flag);
 
-    game:GetService("UserInputService").InputBegan:Connect(function(key)
+    --[[game:GetService("UserInputService").InputBegan:Connect(function(key)
         if key.KeyCode == Enum.KeyCode.KeypadFour or key.KeyCode == Enum.KeyCode.KeypadSix then
             if self.flags[flag] > max then
                 self.flags[flag] = max;
+                slider.Text
             elseif self.flags[flag] < min then
                 self.flags[flag] = min;
             end
         end
+    end)]]--
+
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if self.flags[flag] > max then
+            self.flags[flag] = max;
+        elseif self.flags[flag] < min then
+            self.flags[flag] = min;
+        end
+        slider.Text = text .. tostring(self.flags[flag]);
     end)
 
     return slider;
