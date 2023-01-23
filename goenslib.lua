@@ -193,7 +193,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
                 callbacks[selectedItem]();
             elseif objtypes[selectedItem] == 1 then
                 library.flags[flagnames[selectedItem]] = not library.flags[flagnames[selectedItem]];
-                toggled = library.flags[flagnames[selectedItem]];
+                local toggled = library.flags[flagnames[selectedItem]];
                 --callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
                 callbacks[selectedItem](toggled);
             end
