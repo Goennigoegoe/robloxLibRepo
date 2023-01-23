@@ -195,7 +195,8 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
                 library.flags[flagnames[selectedItem]] = not library.flags[flagnames[selectedItem]];
                 toggled = library.flags[flagnames[selectedItem]];
                 --callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
-                callbacks[selectedItem](toggled);
+                type(toggled);
+                --callbacks[selectedItem](toggled);
             end
         end
     end
