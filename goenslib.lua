@@ -176,7 +176,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
         if objtypes[selectedItem] == 0 then
             callbacks[selectedItem]();
         elseif objtypes[selectedItem] == 1 then
-            callbacks[selectedItem]();
+            callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
             library.flags[flagnames[selectedItem]] = not library.flags[flagnames[selectedItem]];
         end
     end
