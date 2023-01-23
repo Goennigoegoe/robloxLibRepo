@@ -77,7 +77,7 @@ local viewportX = Camera.ViewportSize.X;
 local viewportY = Camera.ViewportSize.Y;
 local viewportSize = Camera.ViewportSize;
 
-local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20}, true);
+local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20, Unloaded = false}, true);
 
 function library:Load(Name, Offset, Watermark, Padding)
     self.Loaded = true;
@@ -163,21 +163,38 @@ function library:CreateToggle(text, default, callback, flag)
     return toggle;
 end
 
+function library:Unload()
+    for i,v in pairs(drawings) do
+        v.Visible = false;
+        v:Remove();
+    end
+
+    for i,v in pairs(flagnames) do
+        if type(library.flags[v]) == "boolean" then
+            library.flags[v] = false;
+        end
+    end
+
+    self.Unloaded = true;
+end
+
 game:GetService("UserInputService").InputBegan:Connect(function(key)
-    if key.KeyCode == Enum.KeyCode.KeypadTwo then
-        selectedItem = selectedItem - 1;
-        selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
-        utility.setColor(selectedItem, interactables);
-    elseif key.KeyCode == Enum.KeyCode.KeypadEight then
-        selectedItem = selectedItem + 1;
-        selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
-        utility.setColor(selectedItem, interactables);
-    elseif key.KeyCode == Enum.KeyCode.KeypadFive then
-        if objtypes[selectedItem] == 0 then
-            callbacks[selectedItem]();
-        elseif objtypes[selectedItem] == 1 then
-            callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
-            library.flags[flagnames[selectedItem]] = not library.flags[flagnames[selectedItem]];
+    if not library.Unloaded then
+        if key.KeyCode == Enum.KeyCode.KeypadTwo then
+            selectedItem = selectedItem - 1;
+            selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
+            utility.setColor(selectedItem, interactables);
+        elseif key.KeyCode == Enum.KeyCode.KeypadEight then
+            selectedItem = selectedItem + 1;
+            selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
+            utility.setColor(selectedItem, interactables);
+        elseif key.KeyCode == Enum.KeyCode.KeypadFive then
+            if objtypes[selectedItem] == 0 then
+                callbacks[selectedItem]();
+            elseif objtypes[selectedItem] == 1 then
+                callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
+                library.flags[flagnames[selectedItem]] = not library.flags[flagnames[selectedItem]];
+            end
         end
     end
 end)
