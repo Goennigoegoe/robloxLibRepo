@@ -68,6 +68,8 @@ local sliders = {};
 local buttons = {};]]--
 local interactables = {};
 local callbacks = {};
+local objtypes = {};
+local flagnames = {};
 local selectedItem = 1;
 
 local Camera = workspace.CurrentCamera;
@@ -115,7 +117,7 @@ function library:CreateLabel(text)
     return lable;
 end
 
-function library:CreateButton(text, callback)
+function library:CreateButton(text, callback, flag)
     local button = Drawing.new("Text");
     button.Visible = true;
     button.Transparency = 1;
@@ -127,27 +129,56 @@ function library:CreateButton(text, callback)
     button.Font = 0;
     button.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
 
+    self.flags[flag] = "Button";
+
     table.insert(drawings, button);
-    table.insert(interactables, button)
-    table.insert(callbacks, callback)
+    table.insert(interactables, button);
+    table.insert(callbacks, callback);
+    table.insert(types, 0);
+    table.insert(flagnames, flag);
 
     return button;
+end
+
+function library:CreateToggle(text, default, callback, flag)
+    local toggle = Drawing.new("Text");
+    toggle.Visible = true;
+    toggle.Transparency = 1;
+    toggle.Text = text;
+    toggle.Color = Color3.new(255, 255, 255);
+    toggle.Center = false;
+    toggle.Size = 25;
+    toggle.Outline = true;
+    toggle.Font = 0;
+    toggle.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
+
+    self.flags[flag] = default;
+
+    table.insert(drawings, toggle);
+    table.insert(interactables, toggle);
+    table.insert(callbacks, callback);
+    table.insert(types, 1);
+    table.insert(flagnames, flag);
+
+    return toggle;
 end
 
 game:GetService("UserInputService").InputBegan:Connect(function(key)
     if key.KeyCode == Enum.KeyCode.KeypadTwo then
         selectedItem = selectedItem - 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
-        print(utility.getLength(interactables));
         utility.setColor(selectedItem, interactables);
-        --print("down");
     elseif key.KeyCode == Enum.KeyCode.KeypadEight then
         selectedItem = selectedItem + 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
         utility.setColor(selectedItem, interactables);
-        --print("up");
     elseif key.KeyCode == Enum.KeyCode.KeypadFive then
-        callbacks[selectedItem]();
+        if objtypes[selectedItem] == 0 then
+            callbacks[selectedItem]();
+        elseif objtypes[selectedItem] == 1 then
+            callbacks[selectedItem]();
+            library.flags[flagnames[selectedItem]] = not library.flags[flagnames[selectedItem]];
+        end
     end
 end)
 
