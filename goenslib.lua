@@ -55,6 +55,7 @@ function utility.setColor(selected, tbl)
             tbl[i].Color = Color3.new(255, 255, 255);
         else
             tbl[i].Color = Color3.new(0, 0, 255);
+            print("selected");
         end
     end
 end
@@ -89,7 +90,7 @@ function library:Load(Name, Offset, Watermark, Padding)
     watermark.Color = Color3.new(255, 255, 255);
     watermark.Text = self.Name;
     watermark.Center = false;
-    watermark.Size = 10;
+    watermark.Size = 25;
     watermark.Outline = true;
     watermark.Font = 0;
     watermark.Position = Vector2.new(0 + Offset.X, 0 + Offset.Y);
@@ -128,6 +129,7 @@ function library.CreateButton(text, callback)
     table.insert(drawings, button);
     table.insert(interactables, button)
     table.insert(callbacks, callback)
+
     return button;
 end
 
@@ -136,10 +138,12 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
         selectedItem = selectedItem - 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
         utility.setColor(selectedItem, interactables);
+        print("down");
     elseif key.KeyCode == Enum.KeyCode.KeypadEight then
         selectedItem = selectedItem + 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
         utility.setColor(selectedItem, interactables);
+        print("up");
     end
 end)
 
