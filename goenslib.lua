@@ -82,7 +82,7 @@ function library:Load(Name, Offset, Watermark, Padding)
     self.Name = Name;
     self.Offset = Offset;
     self.Watermark = Watermark;
-    self.Padding = Padding;
+    library.Padding = Padding;
 
     local watermark = Drawing.new("Text");
     watermark.Visible = self.Watermark;
@@ -98,7 +98,7 @@ function library:Load(Name, Offset, Watermark, Padding)
     table.insert(drawings, watermark);
 end
 
-function library.CreateLabel(text)
+function library:CreateLabel(text)
     local label = Drawing.new("Text");
     label.Visible = true;
     label.Transparency = 1;
@@ -114,7 +114,7 @@ function library.CreateLabel(text)
     return lable;
 end
 
-function library.CreateButton(text, callback)
+function library:CreateButton(text, callback)
     local button = Drawing.new("Text");
     button.Visible = true;
     button.Transparency = 1;
