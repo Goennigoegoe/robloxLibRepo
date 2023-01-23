@@ -77,6 +77,7 @@ local interactables = {};
 local callbacks = {};
 local objtypes = {};
 local flagnames = {};
+local stepSize = {};
 local selectedItem = 1;
 
 local Camera = workspace.CurrentCamera;
@@ -144,6 +145,7 @@ function library:CreateButton(text, callback, flag)
     table.insert(callbacks, callback);
     table.insert(objtypes, 0);
     table.insert(flagnames, flag);
+    table.insert(stepSize, 0);
 
     return button;
 end
@@ -167,6 +169,7 @@ function library:CreateToggle(text, default, callback, flag)
     table.insert(callbacks, callback);
     table.insert(objtypes, 1);
     table.insert(flagnames, flag);
+    table.insert(stepSize, 0);
 
     game:GetService("RunService").Heartbeat:Connect(function()
         toggle.Text = text .. ": " .. utility.toOnOff(self.flags[flag]);
@@ -175,7 +178,7 @@ function library:CreateToggle(text, default, callback, flag)
     return toggle;
 end
 
-function library:CreateSlider(text, default, min, max, callback, flag)
+function library:CreateSlider(text, default, min, max, step, callback, flag)
     local slider = Drawing.new("Text");
     slider.Visible = true;
     slider.Transparency = 1;
@@ -194,6 +197,7 @@ function library:CreateSlider(text, default, min, max, callback, flag)
     table.insert(callbacks, callback);
     table.insert(objtypes, 2);
     table.insert(flagnames, flag);
+    table.insert(stepSize, step);
 
     --[[game:GetService("UserInputService").InputBegan:Connect(function(key)
         if key.KeyCode == Enum.KeyCode.KeypadFour or key.KeyCode == Enum.KeyCode.KeypadSix then
@@ -253,12 +257,12 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
             end
         elseif key.KeyCode == Enum.KeyCode.KeypadFour then
             if objtypes[selectedItem] == 2 then
-                library.flags[flagnames[selectedItem]] = library.flags[flagnames[selectedItem]] - 1;
+                library.flags[flagnames[selectedItem]] = library.flags[flagnames[selectedItem]] - stepSize[selectedItem];
                 callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
             end
         elseif key.KeyCode == Enum.KeyCode.KeypadSix then
             if objtypes[selectedItem] == 2 then
-                library.flags[flagnames[selectedItem]] = library.flags[flagnames[selectedItem]] + 1;
+                library.flags[flagnames[selectedItem]] = library.flags[flagnames[selectedItem]] + stepSize[selectedItem];
                 callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
             end
         end
