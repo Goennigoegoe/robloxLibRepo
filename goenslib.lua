@@ -77,14 +77,15 @@ local viewportX = Camera.ViewportSize.X;
 local viewportY = Camera.ViewportSize.Y;
 local viewportSize = Camera.ViewportSize;
 
-local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20, Unloaded = false}, true);
+local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20, Unloaded = false, TextSize = 25}, true);
 
-function library:Load(Name, Offset, Watermark, Padding)
+function library:Load(Name, Offset, Watermark, Padding, TextSize)
     self.Loaded = true;
 
     self.Name = Name;
     self.Offset = Offset;
     self.Watermark = Watermark;
+    self.TextSize = TextSize;
     library.Padding = Padding;
 
     local watermark = Drawing.new("Text");
@@ -93,7 +94,7 @@ function library:Load(Name, Offset, Watermark, Padding)
     watermark.Color = Color3.new(255, 255, 255);
     watermark.Text = self.Name;
     watermark.Center = false;
-    watermark.Size = 25;
+    watermark.Size = self.TextSize;
     watermark.Outline = true;
     watermark.Font = 0;
     watermark.Position = Vector2.new(0, 0) + self.Offset;
@@ -108,7 +109,7 @@ function library:CreateLabel(text)
     label.Text = text;
     label.Color = Color3.new(255, 255, 255);
     label.Center = false;
-    label.Size = 25;
+    label.Size = self.TextSize;
     label.Outline = true;
     label.Font = 0;
     label.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
@@ -124,7 +125,7 @@ function library:CreateButton(text, callback, flag)
     button.Text = text;
     button.Color = Color3.new(255, 255, 255);
     button.Center = false;
-    button.Size = 25;
+    button.Size = self.TextSize;
     button.Outline = true;
     button.Font = 0;
     button.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
@@ -147,7 +148,7 @@ function library:CreateToggle(text, default, callback, flag)
     toggle.Text = text;
     toggle.Color = Color3.new(255, 255, 255);
     toggle.Center = false;
-    toggle.Size = 25;
+    toggle.Size = self.TextSize;
     toggle.Outline = true;
     toggle.Font = 0;
     toggle.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
@@ -170,7 +171,7 @@ function library:CreateSlider(text, default, min, max, callback, flag)
     slider.Text = text .. " " .. tostring(default);
     slider.Color = Color3.new(255, 255, 255);
     slider.Center = false;
-    slider.Size = 25;
+    slider.Size = self.TextSize;
     slider.Outline = true;
     slider.Font = 0;
     slider.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
