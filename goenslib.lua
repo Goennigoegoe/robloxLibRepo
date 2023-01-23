@@ -93,7 +93,7 @@ function library:Load(Name, Offset, Watermark, Padding)
     watermark.Size = 25;
     watermark.Outline = true;
     watermark.Font = 0;
-    watermark.Position = Vector2.new(0 + Offset.X, 0 + Offset.Y);
+    watermark.Position = Vector2.new(0, 0) + self.Offset;
     
     table.insert(drawings, watermark);
 end
