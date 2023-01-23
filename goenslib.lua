@@ -163,6 +163,39 @@ function library:CreateToggle(text, default, callback, flag)
     return toggle;
 end
 
+function library:CreateSlider(text, default, min, max, callback, flag)
+    local slider = Drawing.new("Text");
+    slider.Visible = true;
+    slider.Transparency = 1;
+    slider.Text = text .. tostring(default);
+    slider.Color = Color3.new(255, 255, 255);
+    slider.Center = false;
+    slider.Size = 25;
+    slider.Outline = true;
+    slider.Font = 0;
+    slider.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
+
+    self.flags[flag] = default;
+
+    table.insert(drawings, slider);
+    table.insert(interactables, slider);
+    table.insert(callbacks, callback);
+    table.insert(objtypes, 2);
+    table.insert(flagnames, flag);
+
+    game:GetService("UserInputService").InputBegan:Connect(function(key)
+        if key.KeyCode == Enum.KeyCode.KeypadFour or key.KeyCode == Enum.KeyCode.KeypadSix then
+            if self.flags[flag] > max then
+                self.flags[flag] = max;
+            elseif self.flags[flag] < min then
+                self.flags[flag] = min;
+            end
+        end
+    end)
+
+    return slider;
+end
+
 function library:Unload()
     for i,v in pairs(drawings) do
         v.Visible = false;
@@ -194,8 +227,17 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
             elseif objtypes[selectedItem] == 1 then
                 library.flags[flagnames[selectedItem]] = not library.flags[flagnames[selectedItem]];
                 local toggled = library.flags[flagnames[selectedItem]];
-                --callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
                 callbacks[selectedItem](toggled);
+            end
+        elseif key.KeyCode == Enum.KeyCode.KeypadFour then
+            if objtypes[flagnames[selectedItem]] == 2 then
+                library.flags[flagnames[selectedItem]] = library.flags[flagnames[selectedItem]] - 1;
+                callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
+            end
+        elseif key.KeyCode == Enum.KeyCode.KeypadSix then
+            if objtypes[selectedItem] == 2 then
+                library.flags[flagnames[selectedItem]] = library.flags[flagnames[selectedItem]] + 1;
+                callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
             end
         end
     end
