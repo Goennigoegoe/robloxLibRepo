@@ -240,7 +240,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
                 callbacks[selectedItem](toggled);
             end
         elseif key.KeyCode == Enum.KeyCode.KeypadFour then
-            if objtypes[flagnames[selectedItem]] == 2 then
+            if objtypes[selectedItem] == 2 then
                 library.flags[flagnames[selectedItem]] = library.flags[flagnames[selectedItem]] - 1;
                 callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
             end
