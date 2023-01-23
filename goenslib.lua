@@ -41,12 +41,13 @@ function utility.getLength(tbl)
     return length;
 end
 
-function utility.wrapAround(current, max)
-    if current > max then
+function utility.wrapAround(current, maxamount)
+    if current > maxamount then
         return 1;
     elseif current < 1 then
-        return max;
+        return maxamount;
     end
+    return current;
 end
 
 function utility.setColor(selected, tbl)
