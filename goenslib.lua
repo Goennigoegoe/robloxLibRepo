@@ -134,7 +134,7 @@ function library:CreateButton(text, callback, flag)
     table.insert(drawings, button);
     table.insert(interactables, button);
     table.insert(callbacks, callback);
-    table.insert(types, 0);
+    table.insert(objtypes, 0);
     table.insert(flagnames, flag);
 
     return button;
@@ -157,7 +157,7 @@ function library:CreateToggle(text, default, callback, flag)
     table.insert(drawings, toggle);
     table.insert(interactables, toggle);
     table.insert(callbacks, callback);
-    table.insert(types, 1);
+    table.insert(objtypes, 1);
     table.insert(flagnames, flag);
 
     return toggle;
