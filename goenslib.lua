@@ -181,19 +181,21 @@ end
 game:GetService("UserInputService").InputBegan:Connect(function(key)
     if not library.Unloaded then
         if key.KeyCode == Enum.KeyCode.KeypadTwo then
-            selectedItem = selectedItem - 1;
+            selectedItem = selectedItem + 1;
             selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
             utility.setColor(selectedItem, interactables);
         elseif key.KeyCode == Enum.KeyCode.KeypadEight then
-            selectedItem = selectedItem + 1;
+            selectedItem = selectedItem - 1;
             selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
             utility.setColor(selectedItem, interactables);
         elseif key.KeyCode == Enum.KeyCode.KeypadFive then
             if objtypes[selectedItem] == 0 then
                 callbacks[selectedItem]();
             elseif objtypes[selectedItem] == 1 then
-                callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
                 library.flags[flagnames[selectedItem]] = not library.flags[flagnames[selectedItem]];
+                toggled = library.flags[flagnames[selectedItem]];
+                --callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
+                callbacks[selectedItem](toggled);
             end
         end
     end
