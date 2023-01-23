@@ -138,12 +138,14 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
         selectedItem = selectedItem - 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
         utility.setColor(selectedItem, interactables);
-        print("down");
+        --print("down");
     elseif key.KeyCode == Enum.KeyCode.KeypadEight then
         selectedItem = selectedItem + 1;
         selectedItem = utility.wrapAround(selectedItem, utility.getLength(interactables));
         utility.setColor(selectedItem, interactables);
-        print("up");
+        --print("up");
+    elseif key.KeyCode == Enum.KeyCode.KeypadFive then
+        callbacks[selectedItem]();
     end
 end)
 
