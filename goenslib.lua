@@ -167,7 +167,7 @@ function library:CreateSlider(text, default, min, max, callback, flag)
     local slider = Drawing.new("Text");
     slider.Visible = true;
     slider.Transparency = 1;
-    slider.Text = text .. tostring(default);
+    slider.Text = text .. " " .. tostring(default);
     slider.Color = Color3.new(255, 255, 255);
     slider.Center = false;
     slider.Size = 25;
@@ -200,7 +200,7 @@ function library:CreateSlider(text, default, min, max, callback, flag)
         elseif self.flags[flag] < min then
             self.flags[flag] = min;
         end
-        slider.Text = text .. tostring(self.flags[flag]);
+        slider.Text = text .. " " .. tostring(self.flags[flag]);
     end)
 
     return slider;
