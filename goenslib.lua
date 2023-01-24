@@ -172,7 +172,9 @@ function library:CreateToggle(text, default, callback, flag)
     table.insert(stepSize, 0);
 
     game:GetService("RunService").Heartbeat:Connect(function()
-        toggle.Text = text .. ": " .. utility.toOnOff(self.flags[flag]);
+        if not self.Unloaded then
+            toggle.Text = text .. ": " .. utility.toOnOff(self.flags[flag]);
+        end
     end)
 
     return toggle;
@@ -205,7 +207,9 @@ function library:CreateSlider(text, default, min, max, step, callback, flag)
         elseif self.flags[flag] < min then
             self.flags[flag] = min;
         end
-        slider.Text = text .. " " .. tostring(self.flags[flag]);
+        if not self.Unloaded then
+            slider.Text = text .. " " .. tostring(self.flags[flag]);
+        end
     end)
 
     return slider;
