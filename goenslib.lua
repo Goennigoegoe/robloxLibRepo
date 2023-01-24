@@ -85,7 +85,7 @@ local viewportX = Camera.ViewportSize.X;
 local viewportY = Camera.ViewportSize.Y;
 local viewportSize = Camera.ViewportSize;
 
-local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20, Unloaded = false, TextSize = 25}, true);
+local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20, Unloaded = false, TextSize = 25, Open = false}, true);
 
 function library:Load(Name, Offset, Watermark, Padding, TextSize)
     self.Loaded = true;
@@ -228,6 +228,14 @@ function library:Unload()
     end
 
     self.Unloaded = true;
+end
+
+function library:Close()
+    self.Open = not self.Open;
+
+    for i,v in pairs(drawings) do
+        v.Visible = self.Open;
+    end
 end
 
 game:GetService("UserInputService").InputBegan:Connect(function(key)
