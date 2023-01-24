@@ -234,9 +234,11 @@ end
 function library:Close()
     self.Open = not self.Open;
 
-    for i,v in pairs(drawings) do
+    print(type(self.Open))
+
+    --[[for i,v in pairs(drawings) do
         v.Visible = self.Open;
-    end
+    end]]--
 end
 
 game:GetService("UserInputService").InputBegan:Connect(function(key)
