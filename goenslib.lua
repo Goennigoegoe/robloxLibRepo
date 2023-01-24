@@ -85,7 +85,7 @@ local viewportX = Camera.ViewportSize.X;
 local viewportY = Camera.ViewportSize.Y;
 local viewportSize = Camera.ViewportSize;
 
-local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20, Unloaded = false, TextSize = 25, Open = false}, true);
+local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20, Unloaded = false, TextSize = 25, open = true}, true);
 
 function library:Load(Name, Offset, Watermark, Padding, TextSize)
     self.Loaded = true;
@@ -232,14 +232,10 @@ function library:Unload()
 end
 
 function library:Close()
-    if self.Open then
-        self.Open = false;
-    else
-        self.Open = true;
-    end
+    self.open = not self.open
 
     for i,v in pairs(drawings) do
-        v.Visible = self.Open;
+        v.Visible = self.open;
     end
 end
 
