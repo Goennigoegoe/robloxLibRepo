@@ -266,6 +266,8 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
                 library.flags[flagnames[selectedItem]] = library.flags[flagnames[selectedItem]] + stepSize[selectedItem];
                 callbacks[selectedItem](library.flags[flagnames[selectedItem]]);
             end
+        elseif key.KeyCode == Enum.KeyCode.RightShift then
+            library:Close();
         end
     end
 end)
