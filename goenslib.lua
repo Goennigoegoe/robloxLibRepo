@@ -232,7 +232,11 @@ function library:Unload()
 end
 
 function library:Close()
-    self.Open = (self.Open == true and false or true);
+    if self.Open then
+        self.Open = false;
+    else
+        self.Open = true;
+    end
 
     for i,v in pairs(drawings) do
         v.Visible = self.Open;
