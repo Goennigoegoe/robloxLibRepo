@@ -87,13 +87,14 @@ local viewportSize = Camera.ViewportSize;
 
 local library = utility.table({Name = "No Name Specified", Offset = Vector2.new(50, 100), flags = {}, Loaded = false, Watermark = false, Padding = 20, Unloaded = false, TextSize = 25, Open = false}, true);
 
-function library:Load(Name, Offset, Watermark, Padding, TextSize)
+function library:Load(Name, Offset, Watermark, Padding, TextSize, Open)
     self.Loaded = true;
 
     self.Name = Name;
     self.Offset = Offset;
     self.Watermark = Watermark;
     self.TextSize = TextSize;
+    self.Open = Open;
     library.Padding = Padding;
 
     local watermark = Drawing.new("Text");
