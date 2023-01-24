@@ -232,13 +232,11 @@ function library:Unload()
 end
 
 function library:Close()
-    self.Open = not self.Open;
+    self.Open = (self.Open == true and false or true);
 
-    print(type(self.Open))
-
-    --[[for i,v in pairs(drawings) do
+    for i,v in pairs(drawings) do
         v.Visible = self.Open;
-    end]]--
+    end
 end
 
 game:GetService("UserInputService").InputBegan:Connect(function(key)
