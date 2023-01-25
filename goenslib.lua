@@ -78,6 +78,7 @@ local callbacks = {};
 local objtypes = {};
 local flagnames = {};
 local stepSize = {};
+local themeDrawings = {};
 local selectedItem = 1;
 
 local Camera = workspace.CurrentCamera;
@@ -107,8 +108,22 @@ function library:Load(Name, Offset, Watermark, Padding, TextSize)
     watermark.Outline = true;
     watermark.Font = 0;
     watermark.Position = Vector2.new(0, 0) + self.Offset;
+    watermark.ZIndex = 1;
+
+    local background = Drawing.new("Square");
+    background.Visible = true;
+    background.Transparency = 1;
+    background.Color = Color3.fromRGB(30, 30, 36);
+    background.ZIndex = 0;
+    background.Thickness = 1;
+    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
+    background.Position = offset - Vector2.new(2, 2);
+    background.Filled = true;
+
+    self.Background = background;
     
     table.insert(drawings, watermark);
+    table.insert(themeDrawings, background);
 end
 
 function library:CreateLabel(text)
@@ -122,8 +137,12 @@ function library:CreateLabel(text)
     label.Outline = true;
     label.Font = 0;
     label.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
+    label.ZIndex = 1;
 
     table.insert(drawings, label);
+
+    self.Background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
+
     return lable;
 end
 
@@ -138,6 +157,7 @@ function library:CreateButton(text, callback, flag)
     button.Outline = true;
     button.Font = 0;
     button.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
+    button.ZIndex = 1;
 
     self.flags[flag] = "Button";
 
@@ -147,6 +167,8 @@ function library:CreateButton(text, callback, flag)
     table.insert(objtypes, 0);
     table.insert(flagnames, flag);
     table.insert(stepSize, 0);
+
+    self.Background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
 
     return button;
 end
@@ -162,6 +184,7 @@ function library:CreateToggle(text, default, callback, flag)
     toggle.Outline = true;
     toggle.Font = 0;
     toggle.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
+    toggle.ZIndex = 1;
 
     self.flags[flag] = default;
 
@@ -178,6 +201,8 @@ function library:CreateToggle(text, default, callback, flag)
         end
     end)
 
+    self.Background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
+
     return toggle;
 end
 
@@ -192,6 +217,7 @@ function library:CreateSlider(text, default, min, max, step, callback, flag)
     slider.Outline = true;
     slider.Font = 0;
     slider.Position = drawings[utility.getLength(drawings)].Position + Vector2.new(0, self.Padding);
+    slider.ZIndex = 1;
 
     self.flags[flag] = default;
 
@@ -212,6 +238,8 @@ function library:CreateSlider(text, default, min, max, step, callback, flag)
             slider.Text = text .. " " .. tostring(self.flags[flag]);
         end
     end)
+
+    self.Background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
 
     return slider;
 end
