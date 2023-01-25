@@ -264,6 +264,7 @@ function library:Close()
     for i,v in pairs(drawings) do
         v.Visible = self.open;
     end
+    self.Background.Visible = self.open;
 end
 
 game:GetService("UserInputService").InputBegan:Connect(function(key)
