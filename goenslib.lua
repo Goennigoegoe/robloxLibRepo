@@ -122,7 +122,7 @@ function library:Load(Name, Offset, Watermark, Padding, TextSize)
     self.Background = background;
     
     table.insert(drawings, watermark);
-    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
+    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, -10);
 end
 
 function library:CreateLabel(text)
@@ -140,7 +140,7 @@ function library:CreateLabel(text)
 
     table.insert(drawings, label);
 
-    self.Background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
+    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, -10);
 
     return lable;
 end
@@ -167,7 +167,7 @@ function library:CreateButton(text, callback, flag)
     table.insert(flagnames, flag);
     table.insert(stepSize, 0);
 
-    self.Background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
+    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, -10);
 
     return button;
 end
@@ -200,7 +200,7 @@ function library:CreateToggle(text, default, callback, flag)
         end
     end)
 
-    self.Background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
+    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, -10);
 
     return toggle;
 end
@@ -238,7 +238,7 @@ function library:CreateSlider(text, default, min, max, step, callback, flag)
         end
     end)
 
-    self.Background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
+    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, -10);
 
     return slider;
 end
