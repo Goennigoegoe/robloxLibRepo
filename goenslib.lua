@@ -115,7 +115,7 @@ function library:Load(Name, Offset, Watermark, Padding, TextSize)
     background.Color = Color3.fromRGB(30, 30, 36);
     background.ZIndex = 0;
     background.Thickness = 1;
-    background.Position = offset - Vector2.new(2, 2);
+    background.Position = self.Offset - Vector2.new(2, 2);
     background.Filled = true;
     background.Size = Vector2.new(50, 20)
 
