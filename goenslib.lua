@@ -78,7 +78,6 @@ local callbacks = {};
 local objtypes = {};
 local flagnames = {};
 local stepSize = {};
-local themeDrawings = {};
 local selectedItem = 1;
 
 local Camera = workspace.CurrentCamera;
@@ -116,14 +115,14 @@ function library:Load(Name, Offset, Watermark, Padding, TextSize)
     background.Color = Color3.fromRGB(30, 30, 36);
     background.ZIndex = 0;
     background.Thickness = 1;
-    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
     background.Position = offset - Vector2.new(2, 2);
     background.Filled = true;
+    background.Size = Vector2.new(50, 20)
 
     self.Background = background;
     
     table.insert(drawings, watermark);
-    table.insert(themeDrawings, background);
+    background.Size = drawings[utility.getLength(drawings)].Position + Vector2.new(50, 2);
 end
 
 function library:CreateLabel(text)
