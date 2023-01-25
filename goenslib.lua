@@ -255,6 +255,8 @@ function library:Unload()
         end
     end
 
+    self.Background:Remove();
+
     self.Unloaded = true;
 end
 
