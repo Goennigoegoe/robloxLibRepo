@@ -150,7 +150,7 @@ for i,v in pairs(game.Players:GetChildren()) do
     cham.OutlineTransparency = 1;
 
     function chamEsp()
-        game.GetService("Runservice").RenderStepped:Connect(function()
+        game:GetService("Runservice").RenderStepped:Connect(function()
             if v and v.Character and v.Character.Humanoid and v.Character.Humanoid.Health > 0 and v.Character.HumanoidRootPart then
                 if library.Chams.Enabled then
                     cham.Enabled = true;
@@ -162,8 +162,7 @@ for i,v in pairs(game.Players:GetChildren()) do
             end
         end)
     end
-
-    coroutine.wrap(chamEsp)();
+    coroutine.wrap(chamEsp)()
 end
 
 game.Players.PlayerAdded:Connect(function(v)
@@ -176,7 +175,7 @@ game.Players.PlayerAdded:Connect(function(v)
     cham.OutlineTransparency = 1;
 
     function chamEsp()
-        game.GetService("Runservice").RenderStepped:Connect(function()
+        game:GetService("Runservice").RenderStepped:Connect(function()
             if v and v.Character and v.Character.Humanoid and v.Character.Humanoid.Health > 0 and v.Character.HumanoidRootPart then
                 if library.Chams.Enabled then
                     cham.Enabled = true;
