@@ -140,6 +140,7 @@ game.Players.PlayerAdded:Connect(function(v)
     coroutine.wrap(boxesp)()
 end)
 
+
 for i,v in pairs(game.Players:GetChildren()) do
     local cham = Instance.new("Highlight");
     cham.Parent = v.Character;
@@ -148,10 +149,11 @@ for i,v in pairs(game.Players:GetChildren()) do
     cham.FillColor = Color3.new(1, 0, 0);
     cham.FillTransparency = 0;
     cham.OutlineTransparency = 1;
+    cham.Adornee = v.Character;
 
     function chamEsp()
         game:GetService("RunService").RenderStepped:Connect(function()
-            if v and v.Character and v.Character.Humanoid and v.Character.Humanoid.Health > 0 and v.Character.HumanoidRootPart then
+            if v and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("Humanoid").Health > 0 then --and v.Character:FindFirstChild("HumanoidRootPart") then
                 if library.Chams.Enabled then
                     cham.Enabled = true;
                 else
@@ -162,7 +164,8 @@ for i,v in pairs(game.Players:GetChildren()) do
             end
         end)
     end
-    coroutine.wrap(chamEsp)()
+
+    coroutine.wrap(chamEsp)();
 end
 
 game.Players.PlayerAdded:Connect(function(v)
@@ -173,10 +176,11 @@ game.Players.PlayerAdded:Connect(function(v)
     cham.FillColor = Color3.new(1, 0, 0);
     cham.FillTransparency = 0;
     cham.OutlineTransparency = 1;
+    cham.Adornee = v.Character;
 
     function chamEsp()
         game:GetService("RunService").RenderStepped:Connect(function()
-            if v and v.Character and v.Character.Humanoid and v.Character.Humanoid.Health > 0 and v.Character.HumanoidRootPart then
+            if v and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("Humanoid").Health > 0 then --and v.Character:FindFirstChild("HumanoidRootPart") then
                 if library.Chams.Enabled then
                     cham.Enabled = true;
                 else
