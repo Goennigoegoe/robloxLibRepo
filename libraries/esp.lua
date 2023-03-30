@@ -10,6 +10,9 @@ local library = {
         Enabled = false,
         Color = Color3.new(255, 255, 255)
     }
+    Chams = {
+        Enabled = false
+    }
 };
 library.__index = library;
 
@@ -135,6 +138,58 @@ game.Players.PlayerAdded:Connect(function(v)
         end)
     end
     coroutine.wrap(boxesp)()
+end)
+
+for i,v in pairs(game.Players:GetChildren()) do
+    local cham = Instance.new("Highlight");
+    cham.Parent = v.Character;
+    cham.Enabled = false;
+    cham.DepthMode = "Occluded";
+    cham.FillColor = Color3.new(1, 0, 0);
+    cham.FillTransparency = 0;
+    cham.OutlineTransparency = 1;
+
+    function chamEsp()
+        game.GetService("Runservice").RenderStepped:Connect(function()
+            if v and v.Character and v.Character.Humanoid and v.Character.Humanoid.Health > 0 and v.Character.HumanoidRootPart then
+                if library.Chams.Enabled then
+                    cham.Enabled = true;
+                else
+                    cham.Enabled = false;
+                end
+            else
+                cham.Enabled = false;
+            end
+        end)
+    end
+
+    coroutine.wrap(chamEsp)();
+end
+
+game.Players.PlayerAdded:Connect(function(v)
+    local cham = Instance.new("Highlight");
+    cham.Parent = v.Character;
+    cham.Enabled = false;
+    cham.DepthMode = "Occluded";
+    cham.FillColor = Color3.new(1, 0, 0);
+    cham.FillTransparency = 0;
+    cham.OutlineTransparency = 1;
+
+    function chamEsp()
+        game.GetService("Runservice").RenderStepped:Connect(function()
+            if v and v.Character and v.Character.Humanoid and v.Character.Humanoid.Health > 0 and v.Character.HumanoidRootPart then
+                if library.Chams.Enabled then
+                    cham.Enabled = true;
+                else
+                    cham.Enabled = false;
+                end
+            else
+                cham.Enabled = false;
+            end
+        end)
+    end
+
+    coroutine.wrap(chamEsp)();
 end)
 
 return setmetatable({}, library);
