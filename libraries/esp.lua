@@ -140,7 +140,7 @@ game.Players.PlayerAdded:Connect(function(v)
     coroutine.wrap(boxesp)()
 end)
 
-for i,v in pairs(game.Players:GetChildren()) do
+--[[for i,v in pairs(game.Players:GetChildren()) do
     local cham = Instance.new("Highlight");
     cham.Parent = v.Character;
     cham.Enabled = false;
@@ -190,6 +190,6 @@ game.Players.PlayerAdded:Connect(function(v)
     end
 
     coroutine.wrap(chamEsp)();
-end)
+end)]]--
 
 return setmetatable({}, library);
