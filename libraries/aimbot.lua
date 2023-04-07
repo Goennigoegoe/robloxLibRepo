@@ -77,7 +77,7 @@ function library._checkFOV(part, camera, radius)
     return false;
 end
 
-function library._checkWall(part, camera, localplayer)
+function library._checkWall(part, camera, localplayer, checkVis)
     local ray = Ray.new(camera.CFrame.Position, (part.Character.HumanoidRootPart.Position - camera.CFrame.Position).Unit * 300);
     local raycast, position = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {camera, localplayer.Character, localplayer.Character.Head, part.Character.HumanoidRootPart}, false, true)
     local pos, visible = camera:WorldToScreenPoint(part.Character.HumanoidRootPart.Position)
@@ -87,21 +87,25 @@ function library._checkWall(part, camera, localplayer)
         elseif raycast.Parent == nil then
             return false;
         end
-        if visible then
-            return true;
+        if checkVis then
+            if visible then
+                return true;
+            else
+                return false;
+            end
         else
-            return false;
+            return true;
         end
     end
     return false;
 end
 
-function library._getClosest(localplayer, part, teamCheck, camera)
+function library._getClosest(localplayer, part, teamCheck, camera, checkVis)
     local closestPlayer = nil
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
         if teamCheck then
-            if v ~= localplayer and v.Team ~= localplayer.Team and Alive(v) and library._checkWall(v, camera, localplayer) and Alive(localplayer) then
+            if v ~= localplayer and v.Team ~= localplayer.Team and Alive(v) and library._checkWall(v, camera, localplayer, checkVis) and Alive(localplayer) then
                 local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
                 if Dist < closestDist then
                     closestDist = Dist
@@ -109,7 +113,7 @@ function library._getClosest(localplayer, part, teamCheck, camera)
                 end
             end
         else
-            if v ~= localplayer and Alive(v) and library._checkWall(v, camera, localplayer) and Alive(localplayer) then
+            if v ~= localplayer and Alive(v) and library._checkWall(v, camera, localplayer, checkVis) and Alive(localplayer) then
                 local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
                 if Dist < closestDist then
                     closestDist = Dist
