@@ -22,6 +22,16 @@ function checkFOV(part, camera, radius)
     return false;
 end
 
+function checkWhitelist(playerName, Whitelist)
+    for i,v in pairs(Whitelist) do
+        if v == playerName then
+            return false;
+        end
+    end
+    return true;
+end
+
+
 function createTracer(pos1, pos2, camera)
     local tracer = Drawing.new("Line");
     tracer.Transparency = 1;
@@ -100,24 +110,26 @@ function library._checkWall(part, camera, localplayer, checkVis)
     return false;
 end
 
-function library._getClosest(localplayer, part, teamCheck, camera, checkVis)
+function library._getClosest(localplayer, part, teamCheck, camera, checkVis, Whitelist)
     local closestPlayer = nil
     local closestDist = math.huge
     for i,v in pairs(game.Players:GetPlayers()) do
-        if teamCheck then
-            if v ~= localplayer and v.Team ~= localplayer.Team and Alive(v) and library._checkWall(v, camera, localplayer, checkVis) and Alive(localplayer) then
-                local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
-                if Dist < closestDist then
-                    closestDist = Dist
-                    closestPlayer = v
+        if checkWhitelist(v.Name, Whitelist) then
+            if teamCheck then
+                if v ~= localplayer and v.Team ~= localplayer.Team and Alive(v) and library._checkWall(v, camera, localplayer, checkVis) and Alive(localplayer) then
+                    local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
+                    if Dist < closestDist then
+                        closestDist = Dist
+                        closestPlayer = v
+                    end
                 end
-            end
-        else
-            if v ~= localplayer and Alive(v) and library._checkWall(v, camera, localplayer, checkVis) and Alive(localplayer) then
-                local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
-                if Dist < closestDist then
-                    closestDist = Dist
-                    closestPlayer = v
+            else
+                if v ~= localplayer and Alive(v) and library._checkWall(v, camera, localplayer, checkVis) and Alive(localplayer) then
+                    local Dist = (localplayer.Character.HumanoidRootPart.Position - v.Character[part].Position).magnitude
+                    if Dist < closestDist then
+                        closestDist = Dist
+                        closestPlayer = v
+                    end
                 end
             end
         end
