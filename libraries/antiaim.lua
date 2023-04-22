@@ -21,15 +21,21 @@ function library.Jitter(Speed, Angle, player)
     end
 end
 
-function library.Angle(Angle, player)
+function library.Angle(Angle, player, cam)
     if Alive(player) then
-        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, math.rad(Angle), 0);
+        local camLv = cam.CFrame.lookVector
+        local camRotation = math.atan2(-camLv.X, -camLv.Z)
+
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, camRotation, 0);
     end
 end
 
-function library.AngleJit(speed, offset, player)
+function library.AngleJit(speed, offset, player, cam)
     if Alive(player) then
-        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, math.rad(offset) + math.rad((math.random(1, 2) == 1 and Jit or -Jit)), 0);
+        local camLv = cam.CFrame.lookVector
+        local camRotation = math.atan2(-camLv.X, -camLv.Z)
+
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, (camRotation + math.rad(offset)) + math.rad((math.random(1, 2) == 1 and Jit or -Jit)), 0);
     end
 end
 
