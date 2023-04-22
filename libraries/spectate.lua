@@ -8,15 +8,17 @@ end
 local library = {};
 library.__index = library;
 
-library.specPlayer(cam, player, localplayer)
-    if Alive(localplayer) and Alive(player) then
-        local target = player.Character.Humanoid;
+function library.specPlayer(cam, player, localplayer)
+    if Alive(localplayer) then
+        if Alive(player) then
+            local target = player.Character.Humanoid;
 
-        cam.CameraSubject = target;
+            cam.CameraSubject = target;
+        end
     end
 end
 
-library.stopSpec(cam, localplayer)
+function library.stopSpec(cam, localplayer)
     if Alive(localplayer) then
         cam.CameraSubject = localplayer.Character.Humanoid;
     end
