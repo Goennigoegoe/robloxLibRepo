@@ -26,7 +26,7 @@ function library.Angle(Angle, player, cam)
         local camLv = cam.CFrame.lookVector
         local camRotation = math.atan2(-camLv.X, -camLv.Z)
 
-        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, camRotation, 0);
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, (camRotation + math.rad(Angle)), 0);
     end
 end
 
