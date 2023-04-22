@@ -23,7 +23,13 @@ end
 
 function library.Angle(Angle, player)
     if Alive(player) then
-        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, Angle, 0);
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, math.rad(Angle), 0);
+    end
+end
+
+function library.AngleJit(speed, offset, player)
+    if Alive(player) then
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position) * CFrame.Angles(0, math.rad(offset) + math.rad((math.random(1, 2) == 1 and Jit or -Jit)), 0);
     end
 end
 
