@@ -32,6 +32,8 @@ end
 
 function library.AngleJit(speed, offset, player, cam)
     if Alive(player) then
+        local Jit = speed;
+
         local camLv = cam.CFrame.lookVector
         local camRotation = math.atan2(-camLv.X, -camLv.Z)
 
